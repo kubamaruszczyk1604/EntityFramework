@@ -1,5 +1,10 @@
 #pragma once
 #define WIN32_LEAN_AND_MEAN
+
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
+
 #include "GLM\GLM.hpp"
 #include "GLM\GTC\matrix_transform.hpp"
 #include "GLM\GTC\type_ptr.hpp"
@@ -76,6 +81,26 @@ namespace UTILITY
 	inline void PRINTL(const std::string& line)
 	{
 		std::cout << line << std::endl;
+	}
+
+	template<typename T> inline std::string ToString(const T& type)
+	{
+		return std::to_string(type);
+	}
+
+    inline std::string ToString(int value)
+	{
+		return std::to_string(value);
+	}
+
+	inline std::string ToString(float value)
+	{
+		return std::to_string(value);
+	}
+
+	inline std::string ToString(double value)
+	{
+		return std::to_string(value);
 	}
 
 	inline void WaitForKeypress()

@@ -5,20 +5,87 @@
 
 
 #include "WindowsApp.h"
+#include "SceneManager.h"
+
+
+struct AtExit
+{
+	~AtExit()
+	{
+		_CrtDumpMemoryLeaks();
+	}
+} doAtExit;
+
+
+
+using namespace UTILITY;
+
+class ExampleScene :public Scene
+{
+public:
+	ExampleScene():Scene()
+	{
+
+	}
+	~ExampleScene(){}
+
+
+	void OnStart()
+	{
+		PRINTL("OnSTart()");
+
+	}
+	void Update(float deltaTime, float totalTime = 0)
+	{
+		//PRINTL("Update(" + ToString(deltaTime) + ", " + ToString(totalTime) + ")");
+	}
+	void OnExit()
+	{
+		PRINTL("OnExit()");
+
+	}
+
+	//for any post rendering stuff (and yes, idea nicked from unity :D)
+	void PostUpdate() {}
+
+	//InputCallbacks
+	void OnKeyPressed(const int key, const KeyState state)
+	{
+		PRINTL("Key Pressed: " + ToString(key));
+
+		SceneManager::Load(new ExampleScene());
+	}
+	void OnMouseMove(const int x, const int y)
+	{
+		PRINTL("Mouse Move: " + ToString(x) + ", " + ToString(y));
+	}
+	void OnMouseButtonUp(MouseButton const button)
+	{
+		PRINTL("Mouse Button Up: " + ToString(static_cast<int>(button)));
+	}
+	void OnMouseButtonDown(MouseButton const button)
+	{
+		PRINTL("Mouse Button Down: " + ToString(static_cast<int>(button)));
+	}
+
+};
+
+
 using namespace UTILITY;
 int main()
 {
 
+
+	
 	// Create application in 1280x720 window
 	WindowsApp::Create(1280, 720, "EMPTY WINDOW KUBA");
+	SceneManager::Load(new ExampleScene());
 
-
-	// Run the app (start the message pump/loop)
 	const int appState = WindowsApp::Run();
-
-	// Clear a few lines on the stdout and wait for a key press
-
+	int* i = new int();
 	WaitForKeypress();
-	return appState;
+
+	
+	return 0;
 }
 

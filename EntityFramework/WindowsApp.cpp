@@ -1,5 +1,6 @@
 #include "WindowsApp.h"
 #include "InputSystem.h"
+#include "SceneManager.h"
 
 using namespace UTILITY;
 
@@ -68,8 +69,7 @@ bool WindowsApp::Create(int const width, int const height, const std::string& ti
 	ShowWindow(s_Hwnd, SW_SHOW);
 
 	PRINTL("WINDOW CREATED..");
-	//DXRenderer::Initialize(s_ClientWidth, s_ClientHeight, s_Hwnd);
-	//SceneManager::Initialize();
+	SceneManager::Initialize();
 	return true;
 }
 
@@ -93,26 +93,24 @@ int WindowsApp::Run()
 		else
 		{
 
-			///	s_FrameTimer.Start();
+			s_FrameTimer.Start();
 			//Updates scene and then renderer
-			//SceneManager::Update(s_FrameTimer.GetElapsed(), s_WorldTimer.GetElapsed() * s_fTimeScale);
+			SceneManager::Update(s_FrameTimer.ElapsedTime()* s_TimeScale, s_GlobalTimer.ElapsedTime() * s_TimeScale);
 
 			//DXRenderer::SwapBuffers();
-			//	s_FrameTimer.Stop();
+		    s_FrameTimer.Stop();
 		}
 
 	}
-	//m_pCurrentScene->OnExit();
-	//delete m_pCurrentScene;
-	//if (m_pCurrentScene = 0)
+
 	if (s_ExitFlag)
 	{
 		msg.wParam = 0;
 	}
-	// Shut down the scene manager
-	//SceneManager::ShutDown();
 
-	// Return the final (exit) message
+	// Shut down the scene manager
+	SceneManager::ShutDown();
+
 	return static_cast<int>(msg.wParam);
 }
 
