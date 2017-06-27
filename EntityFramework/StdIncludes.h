@@ -13,6 +13,7 @@
 
 #include <unordered_map>
 #include <algorithm>
+#include <memory>
 #include <iostream>
 #include <string>
 #include <conio.h>

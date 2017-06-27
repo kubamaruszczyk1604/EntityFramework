@@ -2,6 +2,7 @@
 
 #include "Scene.h"
 
+
 class SceneManager
 {
 
@@ -11,7 +12,7 @@ public:
 	SceneManager& operator=(const SceneManager&) = delete;
 
 private:
-	static Scene* m_pCurrentScene;
+	static SceneUniquePtr m_upCurrentScene;
 
 public:
 	//InputCallbacks
@@ -23,7 +24,7 @@ public:
 
 public:
 	static  void Initialize();
-	static  void Load(Scene* const scene);
+	static  void Load(SceneUniquePtr scene);
 	static  void ShutDown();
 
 };

@@ -53,7 +53,7 @@ public:
 	{
 		PRINTL("Key Pressed: " + ToString(key));
 
-		SceneManager::Load(new ExampleScene());
+		//SceneManager::Load(std::make_unique<ExampleScene>());
 	}
 	void OnMouseMove(const int x, const int y)
 	{
@@ -74,15 +74,11 @@ public:
 using namespace UTILITY;
 int main()
 {
-
-
-	
 	// Create application in 1280x720 window
 	WindowsApp::Create(1280, 720, "EMPTY WINDOW KUBA");
-	SceneManager::Load(new ExampleScene());
+	SceneManager::Load(std::make_unique<ExampleScene>());
 
 	const int appState = WindowsApp::Run();
-	int* i = new int();
 	WaitForKeypress();
 
 	

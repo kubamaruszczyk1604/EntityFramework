@@ -1,4 +1,5 @@
 #pragma once
+#include "StdIncludes.h"
 #include "InputSystem.h"
 
 class Scene
@@ -23,3 +24,4 @@ public:
 	virtual void OnMouseButtonDown(MouseButton const button);
 };
 
+using SceneUniquePtr = std::unique_ptr<Scene>;

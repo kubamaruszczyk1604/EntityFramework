@@ -2,7 +2,10 @@
 #include "InputSystem.h"
 //#include "EntityManager.h"
 //#include "ResourceManager.h"
-Scene* SceneManager::m_pCurrentScene{ nullptr };
+
+
+SceneUniquePtr SceneManager::m_upCurrentScene;
+
 
 void SceneManager::Initialize()
 {
@@ -11,36 +14,36 @@ void SceneManager::Initialize()
 	InputSystem::SetMouseMoveCallback(SceneManager::OnMouseMove);
 }
 
-void SceneManager::Load(Scene * const scene)
+void SceneManager::Load(SceneUniquePtr scene)
 {
 	{
-		if (m_pCurrentScene)
+		if (m_upCurrentScene)
 		{
-			m_pCurrentScene->OnExit();
-			delete m_pCurrentScene;
+			m_upCurrentScene.get()->OnExit();
+			//upCurrentScene.release();
 			//EntityManager::Reset();
 		}
-		m_pCurrentScene = scene;
-		m_pCurrentScene->OnStart();
+		m_upCurrentScene = std::move(scene);
+		m_upCurrentScene->OnStart();
 	}
 
 }
 
 void SceneManager::Update(const float deltaTime, const float totalTime)
 {
-	if (m_pCurrentScene) {
-		m_pCurrentScene->Update(deltaTime, totalTime);
+	if (m_upCurrentScene) {
+		m_upCurrentScene->Update(deltaTime, totalTime);
 		//EntityManager::Update(deltaTime, totalTime);
 		//DXRenderer::Update(deltaTime, totalTime);
-		m_pCurrentScene->PostUpdate();
+		m_upCurrentScene->PostUpdate();
 	}
 }
 
 void SceneManager::ShutDown()
 {
-	if (m_pCurrentScene)
+	if (m_upCurrentScene)
 	{
-		m_pCurrentScene->OnExit();
+		m_upCurrentScene->OnExit();
 		//EntityManager::ShutDown();
 	}
 
@@ -50,32 +53,32 @@ void SceneManager::ShutDown()
 
 void SceneManager::OnKeyPressed(const int key, const KeyState state)
 {
-	if (m_pCurrentScene)
+	if (m_upCurrentScene)
 	{
-		m_pCurrentScene->OnKeyPressed(key, state);
+		m_upCurrentScene->OnKeyPressed(key, state);
 	}
 }
 
 void SceneManager::OnMouseMove(const int x, const int y)
 {
-	if (m_pCurrentScene)
+	if (m_upCurrentScene)
 	{
-		m_pCurrentScene->OnMouseMove(x, y);
+		m_upCurrentScene->OnMouseMove(x, y);
 	}
 }
 
 void SceneManager::OnMouseButtonUp(const MouseButton button)
 {
-	if (m_pCurrentScene)
+	if (m_upCurrentScene)
 	{
-		m_pCurrentScene->OnMouseButtonUp(button);
+		m_upCurrentScene->OnMouseButtonUp(button);
 	}
 }
 
 void SceneManager::OnMouseButtonDown(const MouseButton button)
 {
-	if (m_pCurrentScene)
+	if (m_upCurrentScene)
 	{
-		m_pCurrentScene->OnMouseButtonDown(button);
+		m_upCurrentScene->OnMouseButtonDown(button);
 	}
 }
