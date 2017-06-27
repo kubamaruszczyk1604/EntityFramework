@@ -34,3 +34,11 @@ public:
 
 using ComponentUnique = std::unique_ptr<Component>;
 
+      /*  case WM_PAINT:
+		{
+			HDC hDC;
+			PAINTSTRUCT ps;
+			hDC = BeginPaint(hWnd, &ps);
+			EndPaint(hWnd, &ps);
+			break;
+		}*/
