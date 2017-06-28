@@ -21,20 +21,23 @@
 
 #include "Stopwatch.h"
 
-
-using Vec2i = glm::ivec2;
-using Vec2 = glm::vec2;
-using Vec3 = glm::vec3;
-using Vec4 = glm::vec4;
-using Colour = glm::vec4;
-using Mat4 = glm::mat4;
-
-
-
-
-namespace UTILITY
+namespace KLM_FRAMEWORK
 {
-  
+
+	using Vec2i = glm::ivec2;
+	using Vec2 = glm::vec2;
+	using Vec3 = glm::vec3;
+	using Vec4 = glm::vec4;
+	using Colour = glm::vec4;
+	using Mat4 = glm::mat4;
+	using Quat = glm::quat;
+
+
+
+
+
+
+
 	template<class T_KEY, class T_VAL>
 	bool QueryUnorderedMap(T_KEY key, T_VAL& output, const std::unordered_map<T_KEY, T_VAL>& map)
 	{
@@ -50,6 +53,12 @@ namespace UTILITY
 
 	};
 
+	inline float RandomRange(float low, float high)
+	{
+		return  low + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (high - low)));
+	}
+
+
 	inline bool IsApproxEqual(const float& a, const float& b, float epsilon)
 	{
 		return (fabs(b - a) < epsilon);
@@ -60,17 +69,17 @@ namespace UTILITY
 		return (fabs(b - a) < epsilon);
 	};
 
-	inline Vec3 LerpVector(const Vec3& a, const Vec3& b, float speed)
+
+
+	inline void PrintVec(const Vec3& vec)
 	{
-		Vec3 vec = (b - a);
-		glm::normalize(vec);
-		return (a + (vec*speed));
+		std::cout << "x=" << vec.x << "  y=" << vec.y << "  z=" << vec.z << std::endl;
 	}
 
 
-	inline float RandomRange(float low, float high)
+	inline void PrintCol(const Colour& col)
 	{
-		return  low + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (high - low)));
+		std::cout << "r=" << col.r << "  g=" << col.g << "  b=" << col.b << "  a=" << col.a << std::endl;
 	}
 
 
@@ -84,12 +93,8 @@ namespace UTILITY
 		std::cout << line << std::endl;
 	}
 
-	template<typename T> inline std::string ToString(const T& type)
-	{
-		return std::to_string(type);
-	}
 
-    inline std::string ToString(int value)
+	inline std::string ToString(int value)
 	{
 		return std::to_string(value);
 	}
@@ -103,6 +108,32 @@ namespace UTILITY
 	{
 		return std::to_string(value);
 	}
+
+	inline std::string ToString(const Vec3& vec)
+	{
+
+		return   "x=" + std::to_string(vec.x) +
+			"  y=" + std::to_string(vec.y) +
+			"  z=" + std::to_string(vec.z);
+	}
+
+	inline std::string ToString(const Vec4& vec)
+	{
+
+		return   "x=" + std::to_string(vec.x) +
+			"  y=" + std::to_string(vec.y) +
+			"  z=" + std::to_string(vec.z) +
+			"  w=" + std::to_string(vec.w);
+	}
+
+	//inline std::string ToString(const Colour& colour)
+	//{
+
+	//	return   "r=" + std::to_string(colour.r) +
+	//		"  g=" + std::to_string(colour.g) +
+	//		"  b=" + std::to_string(colour.b) +
+	//		"  a=" + std::to_string(colour.a);
+	//}
 
 	inline void WaitForKeypress()
 	{
@@ -134,11 +165,17 @@ namespace UTILITY
 		return glm::rotate(matrix, degrees, Vec3(0, 0, 1));
 	}
 
+	inline Vec3 LerpVector(const Vec3& a, const Vec3& b, float speed)
+	{
+		Vec3 vec = (b - a);
+		glm::normalize(vec);
+		return (a + (vec*speed));
+	}
+
+
+
 
 
 
 
 }
-
-
-
