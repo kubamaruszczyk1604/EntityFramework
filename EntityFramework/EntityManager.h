@@ -1,28 +1,31 @@
 #pragma once
 #include "Entity.h"
-using EntityUnique = std::unique_ptr<Entity>;
-using ListOfEntities = std::vector<EntityUnique>;
 
-class EntityManager
+namespace KLM_FRAMEWORK
 {
+	using EntityUnique = std::unique_ptr<Entity>;
+	using ListOfEntities = std::vector<EntityUnique>;
 
-private:
+	class EntityManager
+	{
 
-    std::vector<EntityUnique> m_pEntities;
+	private:
 
-public:
+		std::vector<EntityUnique> m_pEntities;
 
-	EntityManager();
-	EntityManager(const EntityManager&) = delete;
-	EntityManager& operator=(const EntityManager&) = delete;
-	~EntityManager();
+	public:
 
-	void AddEntity(EntityUnique entity);
-	void UpdateXForms(float deltaTime, float totalTime = 0);
-	void Clear();
+		EntityManager();
+		EntityManager(const EntityManager&) = delete;
+		EntityManager& operator=(const EntityManager&) = delete;
+		~EntityManager();
 
-	ListOfEntities* GetListOfEntities() { return &m_pEntities; }
+		void AddEntity(EntityUnique entity);
+		void UpdateXForms(float deltaTime, float totalTime = 0);
+		void Clear();
+
+		ListOfEntities* GetListOfEntities() { return &m_pEntities; }
 
 
-};
-
+	};
+}

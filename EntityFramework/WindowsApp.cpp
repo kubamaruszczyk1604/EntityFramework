@@ -2,7 +2,8 @@
 #include "InputSystem.h"
 #include "SceneManager.h"
 
-using namespace UTILITY;
+
+using namespace KLM_FRAMEWORK;
 
 int WindowsApp::s_ClientWidth{ 800 };
 int WindowsApp::s_ClientHeight{ 600 };

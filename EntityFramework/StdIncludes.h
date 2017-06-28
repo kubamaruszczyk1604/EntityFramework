@@ -21,22 +21,23 @@
 
 #include "Stopwatch.h"
 
-
-using Vec2i = glm::ivec2;
-using Vec2 = glm::vec2;
-using Vec3 = glm::vec3;
-using Vec4 = glm::vec4;
-using Colour = glm::vec4;
-using Mat4 = glm::mat4;
-using Quat = glm::quat;
-
-
-
-
-
-namespace UTILITY
+namespace KLM_FRAMEWORK
 {
-  
+
+	using Vec2i = glm::ivec2;
+	using Vec2 = glm::vec2;
+	using Vec3 = glm::vec3;
+	using Vec4 = glm::vec4;
+	using Colour = glm::vec4;
+	using Mat4 = glm::mat4;
+	using Quat = glm::quat;
+
+
+
+
+
+
+
 	template<class T_KEY, class T_VAL>
 	bool QueryUnorderedMap(T_KEY key, T_VAL& output, const std::unordered_map<T_KEY, T_VAL>& map)
 	{
@@ -91,9 +92,9 @@ namespace UTILITY
 	{
 		std::cout << line << std::endl;
 	}
-	
 
-    inline std::string ToString(int value)
+
+	inline std::string ToString(int value)
 	{
 		return std::to_string(value);
 	}
@@ -110,9 +111,9 @@ namespace UTILITY
 
 	inline std::string ToString(const Vec3& vec)
 	{
-		
-		return   "x=" + std::to_string(vec.x) + 
-			"  y=" + std::to_string(vec.y) + 
+
+		return   "x=" + std::to_string(vec.x) +
+			"  y=" + std::to_string(vec.y) +
 			"  z=" + std::to_string(vec.z);
 	}
 
@@ -121,8 +122,8 @@ namespace UTILITY
 
 		return   "x=" + std::to_string(vec.x) +
 			"  y=" + std::to_string(vec.y) +
-			"  z=" + std::to_string(vec.z)+ 
-			"  w=" + std::to_string(vec.w)  ;
+			"  z=" + std::to_string(vec.z) +
+			"  w=" + std::to_string(vec.w);
 	}
 
 	//inline std::string ToString(const Colour& colour)
@@ -173,7 +174,8 @@ namespace UTILITY
 
 
 
+
+
+
+
 }
-
-
-

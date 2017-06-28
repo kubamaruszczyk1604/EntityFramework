@@ -18,7 +18,8 @@ struct AtExit
 
 
 
-using namespace UTILITY;
+
+using namespace KLM_FRAMEWORK;
 
 class ExampleScene :public Scene
 {
@@ -76,7 +77,7 @@ public:
 };
 
 
-using namespace UTILITY;
+
 int main()
 {
 	// Create application in 1280x720 window
