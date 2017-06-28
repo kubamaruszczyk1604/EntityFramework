@@ -23,9 +23,25 @@ public:
 	explicit Entity(const std::string& ID);
 	virtual ~Entity();
 
-	void AddChild(Entity* const child) {
+	void AddChild(Entity* const child) 
+	{
+		if (child->GetParent())
+		{
+			child->GetParent()->RemoveChild(child);
+		}
+
 		child->SetParent(this);
 		m_pChildren.push_back(child);
+	}
+
+
+	void RemoveChild(Entity* child)
+	{
+		if (std::find(m_pChildren.begin(), m_pChildren.end(), child) != m_pChildren.end())
+		{
+			child->SetParent(nullptr);
+			m_pChildren.erase(std::remove(m_pChildren.begin(), m_pChildren.end(), child), m_pChildren.end());
+		}
 	}
 
 	void AddComponent(ComponentUnique component);
@@ -47,5 +63,5 @@ public:
 
 };
 
-using EntityUnique = std::unique_ptr<Entity>;
+
 

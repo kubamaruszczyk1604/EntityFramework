@@ -19,6 +19,7 @@ public:
 
 public:
 	const Vec3& GetPosition()const { return m_Position; }
+	const Vec3& GetLocalPosition()const { return m_Position; }
 	const Vec3& GetRotation()const { return m_Rotation; }
 	const Vec3& GetScale()const { return m_Scale; }
 	const glm::mat4& GetWorldMat()const { return m_World; }

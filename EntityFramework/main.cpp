@@ -32,7 +32,13 @@ public:
 
 	void OnStart()
 	{
-		PRINTL("OnSTart()");
+		PRINTL("OnStart()");
+		Entity* e1 = new Entity("Testuje 1");
+		e1->GetTransform()->SetPositionY(10.0f);
+		Entity* e2 = new Entity("Testuje 2");
+		e1->AddChild(e2);
+		AddEntity(e1);
+		AddEntity(e2);
 
 	}
 	void Update(float deltaTime, float totalTime = 0)
@@ -45,7 +51,6 @@ public:
 
 	}
 
-	//for any post rendering stuff (and yes, idea nicked from unity :D)
 	void PostUpdate() {}
 
 	//InputCallbacks
@@ -53,7 +58,7 @@ public:
 	{
 		PRINTL("Key Pressed: " + ToString(key));
 
-		//SceneManager::Load(std::make_unique<ExampleScene>());
+		SceneManager::Load(new ExampleScene());
 	}
 	void OnMouseMove(const int x, const int y)
 	{
@@ -75,8 +80,8 @@ using namespace UTILITY;
 int main()
 {
 	// Create application in 1280x720 window
-	WindowsApp::Create(1280, 720, "EMPTY WINDOW KUBA");
-	SceneManager::Load(std::make_unique<ExampleScene>());
+	WindowsApp::Create(1280, 720, "EMPTY WINDOW");
+	SceneManager::Load(new ExampleScene());
 
 	const int appState = WindowsApp::Run();
 	WaitForKeypress();

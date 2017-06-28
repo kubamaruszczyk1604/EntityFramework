@@ -68,6 +68,18 @@ namespace UTILITY
 	}
 
 
+	inline void PrintVec(const Vec3& vec)
+	{
+		std::cout << "x=" << vec.x << "  y=" << vec.y << "  z=" << vec.z << std::endl;
+	}
+
+
+	inline void PrintCol(const Colour& col)
+	{
+		std::cout << "r=" << col.r << "  g=" << col.g << "  b=" << col.b << "  a=" << col.a << std::endl;
+	}
+
+
 	inline float RandomRange(float low, float high)
 	{
 		return  low + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (high - low)));
@@ -84,10 +96,7 @@ namespace UTILITY
 		std::cout << line << std::endl;
 	}
 
-	template<typename T> inline std::string ToString(const T& type)
-	{
-		return std::to_string(type);
-	}
+	
 
     inline std::string ToString(int value)
 	{
@@ -102,6 +111,12 @@ namespace UTILITY
 	inline std::string ToString(double value)
 	{
 		return std::to_string(value);
+	}
+
+	inline std::string ToString(const Vec3& vec)
+	{
+		
+		return   "x=" + std::to_string(vec.x) + "  y=" + std::to_string(vec.y) + "  z=" + std::to_string(vec.z);
 	}
 
 	inline void WaitForKeypress()
@@ -134,7 +149,11 @@ namespace UTILITY
 		return glm::rotate(matrix, degrees, Vec3(0, 0, 1));
 	}
 
-
+	inline void DeletePtr(void*& ptr)
+	{
+		delete ptr;
+		ptr = nullptr;
+	}
 
 
 

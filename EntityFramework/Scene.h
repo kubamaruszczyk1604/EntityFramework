@@ -1,11 +1,22 @@
 #pragma once
 #include "StdIncludes.h"
 #include "InputSystem.h"
+#include "EntityManager.h"
 
 class Scene
 {
+
+private:
+	EntityManager* m_pEntityManager;
+
+protected:
+
+	void AddEntity(Entity* entity);
+	void RemoveEntity(const std::string& ID);
+	void RemoveEntity(Entity* entity);
+
 public:
-	Scene() = default;
+	Scene();
 	Scene(const Scene&) = delete;
 	Scene& operator=(const Scene&) = delete;
 
@@ -14,14 +25,15 @@ public:
 	virtual void Update(float deltaTime, float totalTime = 0) = 0;
 	virtual void OnExit() = 0;
 
-	//for any post rendering stuff (and yes, idea nicked from unity :D)
 	virtual void PostUpdate() {}
-
 	//InputCallbacks
 	virtual void OnKeyPressed(const int key, const KeyState state);
 	virtual void OnMouseMove(const int x, const int y);
 	virtual void OnMouseButtonUp(MouseButton const button);
 	virtual void OnMouseButtonDown(MouseButton const button);
+
+
+	EntityManager* GetEntityManager() { return m_pEntityManager; }
 };
 
 using SceneUniquePtr = std::unique_ptr<Scene>;

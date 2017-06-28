@@ -1,11 +1,13 @@
 #include "SceneManager.h"
 #include "InputSystem.h"
-//#include "EntityManager.h"
+#include "EntityManager.h"
+
 //#include "ResourceManager.h"
 
 
 SceneUniquePtr SceneManager::m_upCurrentScene;
 
+using namespace UTILITY;
 
 void SceneManager::Initialize()
 {
@@ -14,26 +16,40 @@ void SceneManager::Initialize()
 	InputSystem::SetMouseMoveCallback(SceneManager::OnMouseMove);
 }
 
-void SceneManager::Load(SceneUniquePtr scene)
+void SceneManager::Load(Scene* scene)
 {
+	
+
+	if (m_upCurrentScene)
 	{
-		if (m_upCurrentScene)
-		{
-			m_upCurrentScene.get()->OnExit();
+		m_upCurrentScene.get()->OnExit();
 			//upCurrentScene.release();
 			//EntityManager::Reset();
-		}
-		m_upCurrentScene = std::move(scene);
-		m_upCurrentScene->OnStart();
 	}
+	m_upCurrentScene = std::unique_ptr<Scene>(scene);
+	m_upCurrentScene->OnStart();
+	
 
 }
 
 void SceneManager::Update(const float deltaTime, const float totalTime)
 {
-	if (m_upCurrentScene) {
+	if (m_upCurrentScene) 
+	{
 		m_upCurrentScene->Update(deltaTime, totalTime);
-		//EntityManager::Update(deltaTime, totalTime);
+		m_upCurrentScene->GetEntityManager()->UpdateXForms(deltaTime, totalTime);
+
+
+		ListOfEntities* list = m_upCurrentScene->GetEntityManager()->GetListOfEntities();
+
+		for (int i = 0; i < list->size(); ++i)
+		{ 
+			Entity* e = (*list)[i].get();
+			PRINTL("ENTITY: " + e->GetID() + " is at position: "  +ToString(e->GetTransform()->GetWorldPosition()));
+
+		}
+
+		//TODO: SYSTEMS ACT ON ENTITIES HERE
 		//DXRenderer::Update(deltaTime, totalTime);
 		m_upCurrentScene->PostUpdate();
 	}
@@ -44,7 +60,6 @@ void SceneManager::ShutDown()
 	if (m_upCurrentScene)
 	{
 		m_upCurrentScene->OnExit();
-		//EntityManager::ShutDown();
 	}
 
 	//ResourceManager::ReleaseResources();

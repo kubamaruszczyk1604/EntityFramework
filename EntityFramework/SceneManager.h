@@ -24,7 +24,7 @@ public:
 
 public:
 	static  void Initialize();
-	static  void Load(SceneUniquePtr scene);
+	static  void Load(Scene* scene);
 	static  void ShutDown();
 
 };
