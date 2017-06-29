@@ -22,6 +22,7 @@ namespace KLM_FRAMEWORK
 
 		void AddEntity(EntityUnique entity);
 		void RemoveEntity(const std::string& id);
+		Entity* FindEntity(const std::string& id);
 		void Update(float deltaTime, float totalTime = 0);
 		void Clear();
 

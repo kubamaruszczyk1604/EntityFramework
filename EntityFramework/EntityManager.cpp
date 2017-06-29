@@ -20,15 +20,23 @@ namespace KLM_FRAMEWORK
 		m_pEntities.push_back(std::move(entity));
 	}
 
-	void EntityManager::RemoveEntity(const std::string& id)
+	void EntityManager::RemoveEntity(const std::string& name)
 	{
 		for (int i = 0; i < m_pEntities.size(); ++i)
 		{
-			if (m_pEntities[i]->GetID() == id)
+			if (m_pEntities[i]->GetName() == name)
 			{
 				Entity* e = m_pEntities[i].get();
 				e->Delete();
 			}
+		}
+	}
+
+	Entity * EntityManager::FindEntity(const std::string & name)
+	{
+		for (int i = 0; i < m_pEntities.size(); ++i)
+		{
+			if (m_pEntities[i]->GetName() == name) return m_pEntities[i].get();
 		}
 	}
 

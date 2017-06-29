@@ -36,10 +36,18 @@ public:
 		PRINTL("OnStart()");
 		Entity* e1 = new Entity("Testuje 1");
 		e1->GetTransform()->SetPositionY(10.0f);
+
 		Entity* e2 = new Entity("Testuje 2");
+		e2->GetTransform()->SetPositionY(10.0f);
 		e1->AddChild(e2);
+
+		Entity* e3 = new Entity("Testuje 3");
+		e3->GetTransform()->SetPositionY(10.0f);
+		e2->AddChild(e3);
+
 		AddEntity(e1);
 		AddEntity(e2);
+		AddEntity(e3);
 
 	}
 	void Update(float deltaTime, float totalTime = 0)
@@ -59,11 +67,24 @@ public:
 	{
 		PRINTL("Key Pressed: " + ToString(key));
 
-		SceneManager::Load(new ExampleScene());
+		//GetEntityManager()->RemoveEntity("Testuje 2");
+
+		Entity* entity = GetEntityManager()->FindEntity("Testuje 2");
+		if(entity)
+		{
+			PRINTL("ENTITY: " + entity->GetName());
+			Entity* child = entity->FindInChildreen("Testuje 3");
+
+			if (child)
+			{
+				PRINTL("CHILD: " + child->GetName());
+			}
+		}
+	
 	}
 	void OnMouseMove(const int x, const int y)
 	{
-		PRINTL("Mouse Move: " + ToString(x) + ", " + ToString(y));
+		//PRINTL("Mouse Move: " + ToString(x) + ", " + ToString(y));
 	}
 	void OnMouseButtonUp(MouseButton const button)
 	{

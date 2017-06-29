@@ -59,8 +59,16 @@ namespace KLM_FRAMEWORK
 		}
 	}
 
-	Entity * Entity::FindInChildreen(const std::string & name)
+	Entity* Entity::FindInChildreen(const std::string & name)
 	{
+		for (auto child : m_pChildren)
+		{
+			if (child->GetName() == name) return (child);
+			Entity* foundInChildreen = child->FindInChildreen(name);
+			if (foundInChildreen) return foundInChildreen;
+
+		}
+
 		return nullptr;
 	}
 

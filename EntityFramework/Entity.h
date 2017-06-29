@@ -46,7 +46,7 @@ namespace KLM_FRAMEWORK
 		
 		Entity* const GetParent() const { return m_pParent; }
 
-		const std::string& GetID() const { return m_ID; }
+		const std::string& GetName() const { return m_ID; }
 
 		const int GetComponentCount() const { return m_pComponents.size(); }
 
