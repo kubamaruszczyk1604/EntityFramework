@@ -25,9 +25,6 @@
 namespace KLM_FRAMEWORK
 {
 
-
-
-
 	using Vec2i = glm::ivec2;
 	using Vec2 = glm::vec2;
 	using Vec3 = glm::vec3;
@@ -36,7 +33,13 @@ namespace KLM_FRAMEWORK
 	using Mat4 = glm::mat4;
 	using Quat = glm::quat;
 
-
+	using KLMint = int;
+	using KLMuint = unsigned int;
+	using KLMfloat = float;
+	using KLMdouble = double;
+	using KLMchar = char;
+	using KLMbyte = char;
+	using KLMbool = bool;
 
 
 
@@ -184,9 +187,49 @@ namespace KLM_FRAMEWORK
 	}
 
 
+	template<class T>
+	class KLMList
+	{
+	private:
+		std::vector<T> m_Data;
+	public:
+		KLMList(){}
+		virtual ~KLMList() {}
 
+		void Add(const T& element) { m_Data.push_back(element); }
+		void Remove(const T& element)
+		{
+			m_Data.erase(std::remove(m_Data.begin(), m_Data.end(), element), m_Data.end());
+		}
+		void RemoveByIndex(KLMuint index)
+		{
+			if (index >= m_Data.size())
+			{
+				throw std::out_of_range("Index is out of range");
+				return;
+			}
+			m_Data.erase(m_Data.begin() + index);
+		}
 
+		void RemoveRange(KLMuint fromIndex, KLMuint toIndex)
+		{
+			if ((fromIndex >= m_Data.size()) || (toIndex >= m_Data.size()))
+			{
+				throw std::out_of_range("Index is out of range");
+				return;
+			}
+			m_Data.erase(m_Data.begin() + fromIndex, m_Data.begin()+toIndex);
+		}
 
+		T& operator[](KLMuint index)
+		{
+			return m_Data[index];
+		}
 
+		void Clear() { m_Data.clear(); }
+
+		KLMuint Count() { return m_Data.size(); }
+
+	};
 
 }

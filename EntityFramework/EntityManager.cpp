@@ -65,7 +65,7 @@ namespace KLM_FRAMEWORK
 
 	}
 
-	void EntityManager::Clear()
+	void EntityManager::RemoveAllEntities()
 	{
 		m_pEntities.clear();
 	}

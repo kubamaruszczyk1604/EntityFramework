@@ -10,7 +10,7 @@ namespace KLM_FRAMEWORK
 
 	Scene::~Scene()
 	{
-		m_pEntityManager->Clear();//not needed really
+		m_pEntityManager->RemoveAllEntities();//not needed really
 		delete m_pEntityManager;
 		m_pEntityManager = nullptr;
 	}
@@ -22,16 +22,15 @@ namespace KLM_FRAMEWORK
 		m_pEntityManager->AddEntity(std::unique_ptr<Entity>(entity));
 	}
 
-	void Scene::RemoveEntity(const std::string & ID)
+	void Scene::RemoveEntity(const std::string & name)
 	{
+		m_pEntityManager->RemoveEntity(name);
 	}
 
-	void Scene::RemoveEntity(Entity * entity)
+	Entity * Scene::FindEntity(const std::string & name)
 	{
-
+		return m_pEntityManager->FindEntity(name);
 	}
-
-
 
 	void Scene::OnKeyPressed(const int key, const KeyState state)
 	{

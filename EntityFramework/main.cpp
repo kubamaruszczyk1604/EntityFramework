@@ -1,11 +1,4 @@
-// BasicWinApi.cpp : Defines the entry point for the console application.
-//
-
-//#include "stdafx.h"
-
-
 #include "WindowsApp.h"
-#include "SceneManager.h"
 
 
 struct AtExit
@@ -34,14 +27,14 @@ public:
 	void OnStart()
 	{
 		PRINTL("OnStart()");
-		Entity* e1 = new Entity("Testuje 1");
+		Entity* e1 = new Entity("Test 1");
 		e1->GetTransform()->SetPositionY(10.0f);
 
-		Entity* e2 = new Entity("Testuje 2");
+		Entity* e2 = new Entity("Test 2");
 		e2->GetTransform()->SetPositionY(10.0f);
 		e1->AddChild(e2);
 
-		Entity* e3 = new Entity("Testuje 3");
+		Entity* e3 = new Entity("Test 3");
 		e3->GetTransform()->SetPositionY(10.0f);
 		e2->AddChild(e3);
 
@@ -69,11 +62,11 @@ public:
 
 		//GetEntityManager()->RemoveEntity("Testuje 2");
 
-		Entity* entity = GetEntityManager()->FindEntity("Testuje 2");
+		Entity* entity = FindEntity("Test 2");
 		if(entity)
 		{
 			PRINTL("ENTITY: " + entity->GetName());
-			Entity* child = entity->FindInChildreen("Testuje 3");
+			Entity* child = entity->FindInChildreen("Test 3");
 
 			if (child)
 			{

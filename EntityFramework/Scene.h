@@ -16,7 +16,7 @@ namespace KLM_FRAMEWORK
 
 		void AddEntity(Entity* entity);
 		void RemoveEntity(const std::string& ID);
-		void RemoveEntity(Entity* entity);
+		Entity* FindEntity(const std::string& ID);
 
 	public:
 		Scene();
