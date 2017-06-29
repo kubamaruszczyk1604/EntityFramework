@@ -16,13 +16,17 @@
 #include <memory>
 #include <iostream>
 #include <string>
+#include <vector>
 #include <conio.h>
-
 
 #include "Stopwatch.h"
 
+
 namespace KLM_FRAMEWORK
 {
+
+
+
 
 	using Vec2i = glm::ivec2;
 	using Vec2 = glm::vec2;
@@ -31,6 +35,7 @@ namespace KLM_FRAMEWORK
 	using Colour = glm::vec4;
 	using Mat4 = glm::mat4;
 	using Quat = glm::quat;
+
 
 
 
@@ -126,7 +131,7 @@ namespace KLM_FRAMEWORK
 			"  w=" + std::to_string(vec.w);
 	}
 
-	//inline std::string ToString(const Colour& colour)
+	//inline String ToString(const Colour& colour)
 	//{
 
 	//	return   "r=" + std::to_string(colour.r) +
@@ -170,6 +175,12 @@ namespace KLM_FRAMEWORK
 		Vec3 vec = (b - a);
 		glm::normalize(vec);
 		return (a + (vec*speed));
+	}
+
+	template<class T>
+	void RemoveFromVecByValue(std::vector<T>& vec, const T& value)
+	{
+		vec.erase(std::remove(vec.begin(), vec.end(), value), vec.end());
 	}
 
 

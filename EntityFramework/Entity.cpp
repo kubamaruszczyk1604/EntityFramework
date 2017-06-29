@@ -15,6 +15,55 @@ namespace KLM_FRAMEWORK
 	{
 	}
 
+	void Entity::Delete()
+	{
+		//If I have parent - unregister me from it.
+		if (m_pParent)
+		{
+			m_pParent->RemoveFromChildreen(this);
+			
+		}
+		// Set me as "to be deleted"
+		m_DeleteMeFlag = true;
+		// Run this method on all my childreen
+		DeleteAllChildreen();
+	}
+
+	void Entity::AddChild(Entity* child)
+	{
+		if (child->GetParent())
+		{
+			child->GetParent()->RemoveFromChildreen(child);
+		}
+
+		child->SetParent(this);
+		m_pChildren.push_back(child);
+	}
+
+	void Entity::RemoveFromChildreen(Entity* child)
+	{
+		if (std::find(m_pChildren.begin(), m_pChildren.end(), child) != m_pChildren.end())
+		{
+			child->SetParent(nullptr);
+			m_pChildren.erase(std::remove(m_pChildren.begin(), m_pChildren.end(), child), m_pChildren.end());
+		}
+	}
+
+
+	void Entity::DeleteAllChildreen()
+	{
+		for (int i = 0; i < m_pChildren.size(); ++i)
+		{
+			//m_pChildren[i]->SetParent(nullptr);
+			m_pChildren[i]->Delete();
+		}
+	}
+
+	Entity * Entity::FindInChildreen(const std::string & name)
+	{
+		return nullptr;
+	}
+
 
 	void Entity::AddComponent(ComponentUnique component)
 	{

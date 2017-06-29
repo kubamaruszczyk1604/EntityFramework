@@ -20,12 +20,9 @@ namespace KLM_FRAMEWORK
 	void SceneManager::Load(Scene* scene)
 	{
 
-
 		if (m_upCurrentScene)
 		{
 			m_upCurrentScene.get()->OnExit();
-			//upCurrentScene.release();
-			//EntityManager::Reset();
 		}
 		m_upCurrentScene = std::unique_ptr<Scene>(scene);
 		m_upCurrentScene->OnStart();
@@ -38,7 +35,7 @@ namespace KLM_FRAMEWORK
 		if (m_upCurrentScene)
 		{
 			m_upCurrentScene->Update(deltaTime, totalTime);
-			m_upCurrentScene->GetEntityManager()->UpdateXForms(deltaTime, totalTime);
+			m_upCurrentScene->GetEntityManager()->Update(deltaTime, totalTime);
 
 
 			ListOfEntities* list = m_upCurrentScene->GetEntityManager()->GetListOfEntities();
@@ -53,6 +50,8 @@ namespace KLM_FRAMEWORK
 			//TODO: SYSTEMS ACT ON ENTITIES HERE
 			//DXRenderer::Update(deltaTime, totalTime);
 			m_upCurrentScene->PostUpdate();
+
+			//m_upCurrentScene->GetEntityManager()->RemoveEntity("Testuje 2");
 		}
 	}
 

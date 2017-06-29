@@ -28,6 +28,7 @@ namespace KLM_FRAMEWORK
 
 	void Scene::RemoveEntity(Entity * entity)
 	{
+
 	}
 
 

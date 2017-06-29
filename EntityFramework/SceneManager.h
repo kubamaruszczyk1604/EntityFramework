@@ -1,5 +1,4 @@
 #pragma once
-
 #include "Scene.h"
 
 namespace KLM_FRAMEWORK

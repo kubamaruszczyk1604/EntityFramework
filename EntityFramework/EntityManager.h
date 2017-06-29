@@ -21,7 +21,8 @@ namespace KLM_FRAMEWORK
 		~EntityManager();
 
 		void AddEntity(EntityUnique entity);
-		void UpdateXForms(float deltaTime, float totalTime = 0);
+		void RemoveEntity(const std::string& id);
+		void Update(float deltaTime, float totalTime = 0);
 		void Clear();
 
 		ListOfEntities* GetListOfEntities() { return &m_pEntities; }
