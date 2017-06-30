@@ -20,8 +20,7 @@ namespace KLM_FRAMEWORK
 		//If I have parent - unregister me from it.
 		if (m_pParent)
 		{
-			m_pParent->RemoveFromChildreen(this);
-			
+			m_pParent->RemoveFromChildreen(this);	
 		}
 		// Set me as "to be deleted"
 		m_DeleteMeFlag = true;
@@ -69,7 +68,6 @@ namespace KLM_FRAMEWORK
 			if (child->GetName() == name) return (child);
 			Entity* foundInChildreen = child->FindInChildreen(name);
 			if (foundInChildreen) return foundInChildreen;
-
 		}
 
 		return nullptr;
@@ -79,13 +77,13 @@ namespace KLM_FRAMEWORK
 	void Entity::AddComponent(ComponentUnique component)
 	{
 		component.get()->SetParent(this);
-		m_pComponents.push_back(std::move(component));
 
+		m_pComponents.StdVector().push_back(std::move(component));
 	}
 
 	Component* Entity::GetComponentFirst(ComponentType const type)
 	{
-		for (int i = 0; i < m_pComponents.size(); ++i)
+		for (int i = 0; i < m_pComponents.Count(); ++i)
 		{
 			if (m_pComponents[i]->GetType() == type) return m_pComponents[i].get();
 		}
@@ -95,11 +93,9 @@ namespace KLM_FRAMEWORK
 
 	void Entity::CalculateTransform()
 	{
-
 		//WORLD TRANSFORM CALCULATION
 		m_Transform.SetWorld(m_Transform.GetParentTransformStack() *
 			glm::translate(m_Identity, m_Transform.GetPosition()));
-
 
 		const Vec3& rotation = m_Transform.GetRotation();
 		m_Transform.SetWorld(glm::rotate(m_Transform.GetWorldMat(), rotation.x, glm::vec3(1, 0, 0)));
@@ -107,13 +103,10 @@ namespace KLM_FRAMEWORK
 		m_Transform.SetWorld(glm::rotate(m_Transform.GetWorldMat(), rotation.z, glm::vec3(0, 0, 1)));
 		m_Transform.SetWorld(glm::scale(m_Transform.GetWorldMat(), m_Transform.GetScale()));
 
-
-
 		for (int i = 0; i < m_pChildren.Count(); ++i)
 		{
 			m_pChildren[i]->GetTransform()->SetParentTransformStack(m_Transform.GetWorldMat());
 		}
-
 
 	}
 }

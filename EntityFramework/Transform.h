@@ -23,7 +23,7 @@ namespace KLM_FRAMEWORK
 		const Vec3& GetLocalPosition()const { return m_Position; }
 		const Vec3& GetRotation()const { return m_Rotation; }
 		const Vec3& GetScale()const { return m_Scale; }
-		const glm::mat4& GetWorldMat()const { return m_World; }
+		const Mat4& GetWorldMat()const { return m_World; }
 
 		void SetPosition(const Vec3& position) { m_Position = position; }
 		void SetPosition(float x, float y, float z) { m_Position = Vec3(x, y, z); }
@@ -43,11 +43,11 @@ namespace KLM_FRAMEWORK
 		void SetScaleY(float y) { m_Scale.y = y; }
 		void SetScaleZ(float z) { m_Scale.z = z; }
 
-		void SetWorld(const glm::mat4& world) { m_World = world; }
+		void        SetWorld(const glm::mat4& world) { m_World = world; }
 		const Mat4& GetParentTransformStack() { return m_ParentTransformStack; }
-		void SetParentTransformStack(const Mat4& pts) { m_ParentTransformStack = pts; }
+		void        SetParentTransformStack(const Mat4& pts) { m_ParentTransformStack = pts; }
 
-		Vec3 GetWorldPosition() { return Vec3(m_World*Vec4(0, 0, 0, 1)); }
+		Vec3        GetWorldPosition() { return Vec3(m_World*Vec4(0, 0, 0, 1)); }
 
 		void UpdatePosition(Vec3 step) { m_Position += step; }
 		void UpdatePosition(float x, float y, float z) { m_Position += Vec3(x, y, z); }

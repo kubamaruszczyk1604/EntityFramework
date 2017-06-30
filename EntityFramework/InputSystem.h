@@ -17,6 +17,7 @@ namespace KLM_FRAMEWORK
 		InputSystem() = delete;
 		InputSystem(const InputSystem&) = delete;
 		InputSystem& operator=(const InputSystem&) = delete;
+
 	private:
 		static Vec2i s_MousePos;
 		static Vec2i s_PreviousMousePos;

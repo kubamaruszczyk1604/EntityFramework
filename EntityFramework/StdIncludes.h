@@ -42,12 +42,8 @@ namespace KLM_FRAMEWORK
 	using KLMbool = bool;
 
 
-
-
-
-
 	template<class T_KEY, class T_VAL>
-	bool QueryUnorderedMap(T_KEY key, T_VAL& output, const std::unordered_map<T_KEY, T_VAL>& map)
+	bool QueryMap(T_KEY key, T_VAL& output, const std::unordered_map<T_KEY, T_VAL>& map)
 	{
 		auto itemPair = map.find(key);
 		if (itemPair != std::end(map))
@@ -57,9 +53,14 @@ namespace KLM_FRAMEWORK
 		}
 
 		return false;
-
-
 	};
+
+	template<class T>
+	void RemoveFromVecByValue(std::vector<T>& vec, const T& value)
+	{
+		vec.erase(std::remove(vec.begin(), vec.end(), value), vec.end());
+	}
+
 
 	inline float RandomRange(float low, float high)
 	{
@@ -76,7 +77,6 @@ namespace KLM_FRAMEWORK
 	{
 		return (fabs(b - a) < epsilon);
 	};
-
 
 
 	inline void PrintVec(const Vec3& vec)
@@ -100,7 +100,6 @@ namespace KLM_FRAMEWORK
 	{
 		std::cout << line << std::endl;
 	}
-
 
 	inline std::string ToString(int value)
 	{
@@ -134,14 +133,14 @@ namespace KLM_FRAMEWORK
 			"  w=" + std::to_string(vec.w);
 	}
 
-	//inline String ToString(const Colour& colour)
-	//{
+	inline std::string ColourToString(const Colour& colour)
+	{
 
-	//	return   "r=" + std::to_string(colour.r) +
-	//		"  g=" + std::to_string(colour.g) +
-	//		"  b=" + std::to_string(colour.b) +
-	//		"  a=" + std::to_string(colour.a);
-	//}
+		return   "r=" + std::to_string(colour.r) +
+			"  g=" + std::to_string(colour.g) +
+			"  b=" + std::to_string(colour.b) +
+			"  a=" + std::to_string(colour.a);
+	}
 
 	inline void WaitForKeypress()
 	{
@@ -180,27 +179,25 @@ namespace KLM_FRAMEWORK
 		return (a + (vec*speed));
 	}
 
-	template<class T>
-	void RemoveFromVecByValue(std::vector<T>& vec, const T& value)
-	{
-		vec.erase(std::remove(vec.begin(), vec.end(), value), vec.end());
-	}
-
 
 	template<class T>
 	class KLMList
 	{
+
 	private:
 		std::vector<T> m_Data;
+
 	public:
 		KLMList(){}
 		virtual ~KLMList() {}
 
 		void Add(const T& element) { m_Data.push_back(element); }
+
 		void Remove(const T& element)
 		{
 			m_Data.erase(std::remove(m_Data.begin(), m_Data.end(), element), m_Data.end());
 		}
+
 		void RemoveByIndex(KLMuint index)
 		{
 			if (index >= m_Data.size())
@@ -230,7 +227,6 @@ namespace KLM_FRAMEWORK
 
 		std::vector<T>& StdVector() { return m_Data; }
 
-
 		T& operator[](KLMuint index)
 		{
 			return m_Data[index];
@@ -238,7 +234,7 @@ namespace KLM_FRAMEWORK
 
 		void Clear() { m_Data.clear(); }
 
-		KLMuint Count() { return m_Data.size(); }
+		KLMuint Count()const { return m_Data.size(); }
 
 	};
 

@@ -5,7 +5,6 @@
 
 namespace KLM_FRAMEWORK
 {
-
 	class Scene
 	{
 
@@ -13,7 +12,6 @@ namespace KLM_FRAMEWORK
 		EntityManager* m_pEntityManager;
 
 	protected:
-
 		void AddEntity(Entity* entity);
 		void RemoveEntity(const std::string& ID);
 		Entity* FindEntity(const std::string& ID);
@@ -29,12 +27,12 @@ namespace KLM_FRAMEWORK
 		virtual void OnExit() = 0;
 
 		virtual void PostUpdate() {}
+
 		//InputCallbacks
 		virtual void OnKeyPressed(const int key, const KeyState state);
 		virtual void OnMouseMove(const int x, const int y);
 		virtual void OnMouseButtonUp(MouseButton const button);
 		virtual void OnMouseButtonDown(MouseButton const button);
-
 
 		EntityManager* GetEntityManager() { return m_pEntityManager; }
 	};

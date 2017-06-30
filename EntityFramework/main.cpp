@@ -16,6 +16,7 @@ using namespace KLM_FRAMEWORK;
 
 class ExampleScene :public Scene
 {
+
 public:
 	ExampleScene():Scene()
 	{
@@ -50,7 +51,6 @@ public:
 	void OnExit()
 	{
 		PRINTL("OnExit()");
-
 	}
 
 	void PostUpdate() {}
@@ -60,13 +60,13 @@ public:
 	{
 		PRINTL("Key Pressed: " + ToString(key));
 
-		//GetEntityManager()->RemoveEntity("Test 2");
+		GetEntityManager()->RemoveEntity("Test 3");
 
 		Entity* entity = FindEntity("Test 1");
 		if(entity)
 		{
 			PRINTL("ENTITY: " + entity->GetName());
-			Entity* child = entity->FindInChildreen("Test 3");
+			Entity* child = entity->FindInChildreen("Test 2");
 
 			if (child)
 			{
@@ -101,7 +101,6 @@ int main()
 	const int appState = WindowsApp::Run();
 	WaitForKeypress();
 
-	
 	return 0;
 }
 

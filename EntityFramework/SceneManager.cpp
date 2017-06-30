@@ -8,8 +8,6 @@ namespace KLM_FRAMEWORK
 {
 	SceneUniquePtr SceneManager::m_upCurrentScene;
 
-	
-
 	void SceneManager::Initialize()
 	{
 		InputSystem::SetKeyboardCallback(SceneManager::OnKeyPressed);
@@ -26,7 +24,6 @@ namespace KLM_FRAMEWORK
 		}
 		m_upCurrentScene = std::unique_ptr<Scene>(scene);
 		m_upCurrentScene->OnStart();
-
 
 	}
 
@@ -60,9 +57,7 @@ namespace KLM_FRAMEWORK
 		{
 			m_upCurrentScene->OnExit();
 		}
-
 		//ResourceManager::ReleaseResources();
-
 	}
 
 	void SceneManager::OnKeyPressed(const int key, const KeyState state)
