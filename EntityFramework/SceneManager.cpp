@@ -43,7 +43,7 @@ namespace KLM_FRAMEWORK
 			for (int i = 0; i < list->size(); ++i)
 			{
 				Entity* e = (*list)[i].get();
-			//	PRINTL("ENTITY: " + e->GetID() + " is at position: " + ToString(e->GetTransform()->GetWorldPosition()));
+				//PRINTL("ENTITY: " + e->GetName() + " is at position: " + ToString(e->GetTransform()->GetWorldPosition()));
 
 			}
 

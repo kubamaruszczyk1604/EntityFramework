@@ -37,22 +37,22 @@ namespace KLM_FRAMEWORK
 		}
 
 		child->SetParent(this);
-		m_pChildren.push_back(child);
+		m_pChildren.Add(child);
 	}
 
 	void Entity::RemoveFromChildreen(Entity* child)
 	{
-		if (std::find(m_pChildren.begin(), m_pChildren.end(), child) != m_pChildren.end())
+		if (m_pChildren.Contains(child))
 		{
 			child->SetParent(nullptr);
-			m_pChildren.erase(std::remove(m_pChildren.begin(), m_pChildren.end(), child), m_pChildren.end());
+			m_pChildren.Remove(child);
 		}
 	}
 
 
 	void Entity::DeleteAllChildreen()
 	{
-		for (int i = 0; i < m_pChildren.size(); ++i)
+		for (int i = 0; i < m_pChildren.Count(); ++i)
 		{
 			//m_pChildren[i]->SetParent(nullptr);
 			m_pChildren[i]->Delete();
@@ -61,8 +61,11 @@ namespace KLM_FRAMEWORK
 
 	Entity* Entity::FindInChildreen(const std::string & name)
 	{
-		for (auto child : m_pChildren)
+		for (int i = 0; i < m_pChildren.Count(); ++i)
 		{
+			Entity* child = m_pChildren[i];
+			if (child->ShouldDelete()) continue;
+
 			if (child->GetName() == name) return (child);
 			Entity* foundInChildreen = child->FindInChildreen(name);
 			if (foundInChildreen) return foundInChildreen;
@@ -80,7 +83,7 @@ namespace KLM_FRAMEWORK
 
 	}
 
-	Component * Entity::GetComponentFirst(ComponentType const type)
+	Component* Entity::GetComponentFirst(ComponentType const type)
 	{
 		for (int i = 0; i < m_pComponents.size(); ++i)
 		{
@@ -106,7 +109,7 @@ namespace KLM_FRAMEWORK
 
 
 
-		for (int i = 0; i < m_pChildren.size(); ++i)
+		for (int i = 0; i < m_pChildren.Count(); ++i)
 		{
 			m_pChildren[i]->GetTransform()->SetParentTransformStack(m_Transform.GetWorldMat());
 		}

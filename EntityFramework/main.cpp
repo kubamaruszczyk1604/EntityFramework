@@ -60,9 +60,9 @@ public:
 	{
 		PRINTL("Key Pressed: " + ToString(key));
 
-		//GetEntityManager()->RemoveEntity("Testuje 2");
+		//GetEntityManager()->RemoveEntity("Test 2");
 
-		Entity* entity = FindEntity("Test 2");
+		Entity* entity = FindEntity("Test 1");
 		if(entity)
 		{
 			PRINTL("ENTITY: " + entity->GetName());

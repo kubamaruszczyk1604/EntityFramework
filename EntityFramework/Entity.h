@@ -9,7 +9,7 @@ namespace KLM_FRAMEWORK
 	{
 
 	private:
-		std::vector<Entity*> m_pChildren;
+		KLMList<Entity*> m_pChildren;
 		std::vector<ComponentUnique> m_pComponents;
 		std::string m_ID;
 		Entity* m_pParent;

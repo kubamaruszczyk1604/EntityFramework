@@ -221,6 +221,16 @@ namespace KLM_FRAMEWORK
 			m_Data.erase(m_Data.begin() + fromIndex, m_Data.begin()+toIndex);
 		}
 
+		bool Contains(const T& element)
+		{
+		if (std::find(m_Data.begin(), m_Data.end(), element) != m_Data.end())
+				return true;
+			return false;
+		}
+
+		std::vector<T>& StdVector() { return m_Data; }
+
+
 		T& operator[](KLMuint index)
 		{
 			return m_Data[index];

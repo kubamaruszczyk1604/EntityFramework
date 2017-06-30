@@ -36,8 +36,14 @@ namespace KLM_FRAMEWORK
 	{
 		for (int i = 0; i < m_pEntities.size(); ++i)
 		{
-			if (m_pEntities[i]->GetName() == name) return m_pEntities[i].get();
+			if (m_pEntities[i]->ShouldDelete())continue;
+			if (m_pEntities[i]->GetName() == name)
+			{
+				
+				return m_pEntities[i].get();
+			}
 		}
+		return nullptr;
 	}
 
 	void EntityManager::Update(float const deltaTime, float const totalTime)
